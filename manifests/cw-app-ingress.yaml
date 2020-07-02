@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cw-app-ingress   
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: cw-app-svc # name of your cw-app service
+          servicePort: 80
+        path: /john-cw-app(/|$)(.*) # for example, path: /john-cw-app(/|$)(.*)      
