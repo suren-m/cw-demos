@@ -1,8 +1,13 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-rg="cw-rg"
-aks="cw"
-acr="cwacruks"
+read -p "Enter clustername: "
+
+aks=${REPLY:-"cw"}
+print "cluster name will be $aks"
+rg="$aks-rg"
+print "resource group name will be $rg"
+acr="$aks-acruks"
+print "acr will be $acr"
 nodes=3
 
 # delete existing
@@ -21,12 +26,12 @@ az acr create --resource-group $rg --name $acr --sku Basic
 az aks update -n $aks -g $rg --attach-acr $acr
 
 # dashboard
-kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 
 
 # merge config
-# az aks get-credentials -n $aks -g $rg
+az aks get-credentials -n $aks -g $rg
 
+kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 # access dashboard
 # az aks browse -n $aks -g $rg
 

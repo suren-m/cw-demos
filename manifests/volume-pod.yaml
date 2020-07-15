@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumepod
+  labels:
+    name: volumepod
+spec:
+  volumes:
+    - name: my-volume               
+      persistentVolumeClaim:
+          claimName: suren-claim
+  containers:
+  - name: volumepod
+    image: nginx:1.19.0
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "50m"    
+    volumeMounts:
+      - mountPath: /mnt/my-persistent-storage/
+        name: my-volume

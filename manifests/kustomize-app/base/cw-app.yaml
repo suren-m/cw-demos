@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: cw-app
+  name: cw-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cw-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: cw-app
+    spec:
+      containers:
+      - image: surenmcode/cw-app:2.1
+        name: cw-app
+        resources: {}
+status: {}

@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - cw-app.yaml
+  - cw-app-svc.yaml
+  - cw-app-ingress.yaml
+
+    #patches:
+    #  - replica_count.yaml
